@@ -1,0 +1,156 @@
+#%RAML 1.0 Library
+usage: "this is created for hotel object input and output"
+
+types:
+  bookhoteltRequest:
+   description: "create hotel request"
+   type: object
+   properties:
+    "hotelname": 
+        type: string
+        example: IND001
+    "checkinDate":
+        type: string
+        example: IND001
+    "checkoutDate":
+        type: integer
+        example: 2
+    "roomType":
+        enum:
+          - deluxe Room
+          - single Room
+          - double room
+          - twin room
+        example:
+          deluxe Room
+
+
+  bookhotel201Response:
+    description: "create hotel request"
+    type: object
+    properties:
+      messagecode:
+        type: integer
+        example: 201
+      message:
+        type: string
+        example: "Sucess"
+      description:
+        type: string
+        example: "hotel booked succesfully"
+      date-time: 
+        type: string 
+        example: "2021-12-29 11:27"
+
+
+  bookhotel400Response:
+    description: "create hotel request"
+    type: object
+    properties:
+      errorcode:
+        type: integer
+        example: 400
+      message:
+        type: string
+        example: "bad request"
+      description:
+        type: string
+        example: "invalid request"
+      date-time: 
+        type: string 
+        example: "2021-12-29 11:27"
+
+
+
+  bookhotel500Response:
+    description: "create hotel request"
+    type: object
+    properties:
+      errorcode:
+        type: integer
+        example: 500
+      message:
+        type: string
+        example: "server error"
+      description:
+        type: string
+        example: "internal Server Error"
+      date-time: 
+        type: string 
+        example: "2021-12-29 11:27"
+  
+  bookhotel401Response:
+    description: "create hotel request"
+    type: object
+    properties:
+      errorcode:
+        type: integer
+        example: 401
+      message:
+        type: string
+        example: "unauthorised"
+      description:
+        type: string
+        example: "401 unauthorised"
+      date-time: 
+        type: string 
+        example: "2021-12-29 11:27"
+  
+
+  bookhotel404Response:
+    description: "create hotel request"
+    type: object
+    properties:
+      errorcode:
+        type: integer
+        example: 404
+      message:
+        type: string
+        example: "Not found"
+      description:
+        type: string
+        example: "404 not found"
+      date-time: 
+        type: string 
+        example: "2021-12-29 11:27"
+      
+  bookhotel200Response:
+    description: "get hotel details"
+    type: object
+    properties:
+      hotelName:
+        type: string
+        example: Taj
+      hotelTypebylocation:
+        enum:
+          - Airport Hotels
+          - Boatels 
+          - Motel 
+          - Suburb Hotels
+          - Resorts 
+        example: Resorts 
+      hotelStarrating:
+        enum:
+          - one star
+          - two star
+          - three star
+          - four star
+          - five star
+        example: one star
+      Price: 
+        type: number 
+        example: 20000
+      freeCancellation:
+        enum:
+          - yes
+          - no
+        example: yes
+      
+          
+          
+          
+          
+          
+
+
+  

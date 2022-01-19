@@ -1,0 +1,17 @@
+[ {
+      "cabmodelname": "Dzire, Etios",
+      "cabtype": "SUV",
+      "numberofseats": 4,
+      "fareamount": 3500,
+      "VendorName": "sai krupa travel"
+
+  } ,
+  {  
+      "cabmodelname": "Dzire, Etios",
+      "cabtype": "SUV",
+      "numberofseats": 4,
+      "fareamount": 3500,
+      "vendorName": "diamond travel"
+
+  }
+]

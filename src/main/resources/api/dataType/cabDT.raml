@@ -1,0 +1,152 @@
+#%RAML 1.0 Library
+usage: "this is created for cab object input and output"
+
+types:
+  bookcabRequest:
+   description: "create cab request"
+   type: object
+   properties:
+    "vendorname": 
+        type: string
+        example: sai krupa travel
+    "sourcecity":
+        type: string
+        example: mumbai
+    "destinationcity":
+        type: string
+        example: banglore
+    "pickupdate":
+        type: string
+        example:
+          05-1-2022 21:55
+    "customer": customerdetails[]
+    
+  customerdetails:
+    properties:
+      "firstName":
+         type: string
+         example: rakesh
+      "lastName":
+         type: string
+         example: parte
+
+
+  bookcab201Response:
+    description: "create cab request"
+    type: object
+    properties:
+      messagecode:
+        type: integer
+        example: 201
+      message:
+        type: string
+        example: "Success"
+      description:
+        type: string
+        example: "cab booked succesfully"
+      date-time: 
+        type: string 
+        example: "2021-12-29 11:27"
+
+
+  bookcab400Response:
+    description: "create cab request"
+    type: object
+    properties:
+      errorcode:
+        type: integer
+        example: 400
+      message:
+        type: string
+        example: "bad request"
+      description:
+        type: string
+        example: "invalid request"
+      date-time: 
+        type: string 
+        example: "2021-12-29 11:27"
+
+
+
+  bookcab500Response:
+    description: "create cab request"
+    type: object
+    properties:
+      errorcode:
+        type: integer
+        example: 500
+      message:
+        type: string
+        example: "server error"
+      description:
+        type: string
+        example: "internal Server Error"
+      date-time: 
+        type: string 
+        example: "2021-12-29 11:27"
+  
+  bookcab401Response:
+    description: "create cab request"
+    type: object
+    properties:
+      errorcode:
+        type: integer
+        example: 401
+      message:
+        type: string
+        example: "unauthorised"
+      description:
+        type: string
+        example: "401 unauthorised"
+      date-time: 
+        type: string 
+        example: "2021-12-29 11:27"
+  
+
+  bookcab404Response:
+    description: "create cab request"
+    type: object
+    properties:
+      errorcode:
+        type: integer
+        example: 404
+      message:
+        type: string
+        example: "Not found"
+      description:
+        type: string
+        example: "404 not found"
+      date-time: 
+        type: string 
+        example: "2021-12-29 11:27"
+      
+  bookcab200Response:
+    description: "get cab details"
+    type: object
+    properties:
+      cabmodelname:
+        type: string
+        example: Dzire, Etios
+      cabtype:
+        enum:
+          - hash back
+          - SUV 
+        example: SUV 
+      numberofseats:
+        type: number
+        example: 2
+      fareamount: 
+        type: number 
+        example: 20000
+      vendorName:
+        type: string
+        example: diamond travel
+      
+          
+          
+          
+          
+          
+
+
+  

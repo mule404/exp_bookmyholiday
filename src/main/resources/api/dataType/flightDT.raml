@@ -1,0 +1,155 @@
+#%RAML 1.0 Library
+usage: "this is created for flight input and output"
+
+types:
+  bookflightRequest:
+   description: "create flight request"
+   type: object
+   properties:
+    "flightCode": 
+        type: string
+        example: IND001
+    "journeyDate":
+        type: string
+        example: IND001
+    "passengersCount":
+        type: integer
+        example: 2
+    "class":
+        enum:
+          - business
+          - economy
+        example:
+          business
+    source:
+      type: string
+      example:
+        Banglore
+    destination:
+      type: string
+      example:
+        Mumbai
+
+  bookflight201Response:
+    description: "create flight request"
+    type: object
+    properties:
+      messagecode:
+        type: integer
+        example: 201
+      message:
+        type: string
+        example: "Sucess"
+      description:
+        type: string
+        example: "flight booked succesfully"
+      date-time: 
+        type: string 
+        example: "2021-12-29 11:27"
+
+
+  bookflight400Response:
+    description: "create flight request"
+    type: object
+    properties:
+      errorcode:
+        type: integer
+        example: 400
+      message:
+        type: string
+        example: "bad re"
+      description:
+        type: string
+        example: "invalid request"
+      date-time: 
+        type: string 
+        example: "2021-12-29 11:27"
+
+
+
+  bookflight500Response:
+    description: "create flight request"
+    type: object
+    properties:
+      errorcode:
+        type: integer
+        example: 500
+      message:
+        type: string
+        example: "server error"
+      description:
+        type: string
+        example: "internal Server Error"
+      date-time: 
+        type: string 
+        example: "2021-12-29 11:27"
+  
+  bookflight401Response:
+    description: "create flight request"
+    type: object
+    properties:
+      errorcode:
+        type: integer
+        example: 401
+      message:
+        type: string
+        example: "unauthorised"
+      description:
+        type: string
+        example: "401 unauthorised"
+      date-time: 
+        type: string 
+        example: "2021-12-29 11:27"
+  
+
+  bookflight404Response:
+    description: "create flight request"
+    type: object
+    properties:
+      errorcode:
+        type: integer
+        example: 404
+      message:
+        type: string
+        example: "Not found"
+      description:
+        type: string
+        example: "404 not found"
+      date-time: 
+        type: string 
+        example: "2021-12-29 11:27"
+      
+  bookflight200Response:
+    description: "get flights details"
+    type: object
+    properties:
+      airline:
+        type: string
+        example: Indigo
+      flightCode:
+        type: number
+        example: 7955
+      origin:
+        type: string
+        example: "CHN"
+      destination: 
+        type: string 
+        example: "HYD"
+      departureDate:
+        type: string
+        example: "2021-11-11"
+      departureTime:
+        type: string
+        example: "02:20"
+      emptySeats:
+        type: number
+        example: 20
+      totalSeats:
+        type: number
+        example: 40
+      price:
+        type: number
+        example: 1100
+
+
+  

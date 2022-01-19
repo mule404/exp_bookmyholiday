@@ -1,0 +1,22 @@
+[ {
+      "airline": "Indigo",
+      "flightCode": 7955,
+      "origin": "CHN",
+      "destination": "HYD",
+      "departureDate": "2021-11-11",
+      "departureTime": "02:20",
+      "emptySeats": 20,
+      "totalSeats": 200,
+      "price": 4100
+  } ,
+  {    "airline": "Indigo",
+      "flightCode": 7956,
+      "origin": "BLR",
+      "destination": "HYD",
+      "departureDate": "2021-12-12",
+      "departureTime": "04:30",
+      "emptySeats": 24,
+      "totalSeats": 350,
+      "price": 5450
+  }
+]

@@ -1,0 +1,67 @@
+#%RAML 1.0 Library
+usage:
+
+traits:
+  client-id-required:
+    headers:
+      client_id:
+        type: string
+        required: true
+      client_secret:
+        type: string
+        required: true
+    responses:
+      401:
+       description: Unauthorised
+      500:
+        description: bad request from server
+
+resourceTypes:
+  collection:
+    get?:  
+      is: [client-id-required]   
+      description: This is to fetch details for <<resourcePathName>>
+      responses:
+        200:
+         body:
+            application/json:
+              example: <<examplereference200>>
+
+
+    post?:
+      is: [client-id-required] 
+      description: This is to fetch details for <<resourcePathName>>
+      body:
+       application/json:
+        type: <<inputrequesttype2>>
+      responses:
+        201:
+         body:
+          application/json:
+            type: <<inputrequesttype3>>
+            example: <<examplereference201>>
+              
+      
+        400:
+          body:
+            application/json:
+              type: <<inputrequesttype4>>
+              example: <<examplereference400>>
+      
+        401:
+         body:
+          application/json:
+            type: <<inputrequesttype5>>
+            example: <<examplereference401>>
+     
+        404:
+         body:
+          application/json:
+            type: <<inputrequesttype6>>
+            example: <<examplereference404>>
+      
+        500:
+         body:
+          application/json:
+            type: <<inputrequesttype7>>
+            example: <<examplereference500>>

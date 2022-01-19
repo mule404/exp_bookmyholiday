@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:car-booking="http://www.mulesoft.org/schema/mule/car-booking" xmlns:prc-flight-booking="http://www.mulesoft.org/schema/mule/prc-flight-booking"
+	xmlns:json-logger="http://www.mulesoft.org/schema/mule/json-logger"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/json-logger http://www.mulesoft.org/schema/mule/json-logger/current/mule-json-logger.xsd
+http://www.mulesoft.org/schema/mule/prc-flight-booking http://www.mulesoft.org/schema/mule/prc-flight-booking/current/mule-prc-flight-booking.xsd
+http://www.mulesoft.org/schema/mule/car-booking http://www.mulesoft.org/schema/mule/car-booking/current/mule-car-booking.xsd">
+	<json-logger:config name="JSON_Logger_Config" doc:name="JSON Logger Config" doc:id="94f90709-4c4e-4835-ace3-6241f2ff8ca3" environment="${mule.dev}" />
+	<prc-flight-booking:config name="Prc_flightBooking_Config" doc:name="Prc_flightBooking Config" doc:id="5895c69f-3a2f-47d8-a02c-bdacd11311e3" property_host="prcflightbooking.us-e2.cloudhub.io" property_port="80" property_protocol="HTTP" property_basePath="/api/" property_responseTimeout="50000" />
+	<configuration-properties doc:name="Configuration properties" doc:id="52af5e00-1272-47f1-883c-36e70b57222b" file="config.yaml" />
+	<car-booking:config name="CarBooking_Config" doc:name="CarBooking Config" doc:id="09ce00a7-f1d7-4962-a260-2cebfaf2af85" property_host="prccarbooking.us-e2.cloudhub.io" property_port="80" property_protocol="HTTP" property_basePath="/api/" property_responseTimeout="50000" />
+</mule>

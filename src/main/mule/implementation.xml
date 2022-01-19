@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:car-booking="http://www.mulesoft.org/schema/mule/car-booking" xmlns:validation="http://www.mulesoft.org/schema/mule/validation"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:prc-flight-booking="http://www.mulesoft.org/schema/mule/prc-flight-booking" xmlns:json-logger="http://www.mulesoft.org/schema/mule/json-logger" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/json-logger http://www.mulesoft.org/schema/mule/json-logger/current/mule-json-logger.xsd
+http://www.mulesoft.org/schema/mule/prc-flight-booking http://www.mulesoft.org/schema/mule/prc-flight-booking/current/mule-prc-flight-booking.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/validation http://www.mulesoft.org/schema/mule/validation/current/mule-validation.xsd
+http://www.mulesoft.org/schema/mule/car-booking http://www.mulesoft.org/schema/mule/car-booking/current/mule-car-booking.xsd">
+	<flow name="getFlights" doc:id="aacf79a6-1d2d-441e-9ab9-0d54bf6fb9fa" >
+		<json-logger:logger doc:name="start exp layer" doc:id="144ffd14-6b88-4334-bb3f-69af825efb6f" config-ref="JSON_Logger_Config" message="start exp layer"/>
+		<set-variable value="#[attributes.queryParams.source]" doc:name="source" doc:id="40e5f170-4cbe-44aa-a9db-f6b4cb5f13d5" variableName="source"/>
+		<set-variable value="#[attributes.queryParams.destination]" doc:name="destination" doc:id="f08895d7-ff37-4d23-a000-b3b7f3593ec2" variableName="dest"/>
+		<prc-flight-booking:get-flights doc:name="Get flights" doc:id="e48bb46a-b502-4029-b93f-a30f425ebaa4" config-ref="Prc_flightBooking_Config" from="#[attributes.queryParams.source]" to="#[attributes.queryParams.destination]"/>
+		<ee:transform doc:name="Transform Message" doc:id="1fe2b426-ead9-4e87-83ff-9b6f765b3154" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<json-logger:logger doc:name="end of exp layer" doc:id="607ff3a3-61e8-4bc6-a834-26005506ff7d" config-ref="JSON_Logger_Config" message="end of exp layer"/>
+	</flow>
+	<flow name="bookFlights" doc:id="866c3179-d409-4361-a9ab-5813fa6f0b3b" >
+		<json-logger:logger doc:name="start of book exp layer" doc:id="6b6b1216-813f-4bb8-9262-4246b466b849" config-ref="JSON_Logger_Config" message="start of book exp layer"/>
+		<prc-flight-booking:create-flight doc:name="Create flight" doc:id="a31ea381-dea0-45e6-a313-5365a371bf2c" config-ref="Prc_flightBooking_Config"/>
+		<json-logger:logger doc:name="end of booking flight exp layer" doc:id="9794ca4f-dab3-4c6a-a634-d8980ddacd7a" config-ref="JSON_Logger_Config" message="end of booking flight exp layer"/>
+	</flow>
+	<flow name="getcars" doc:id="71b248b5-2cc5-4fd6-ae92-ec996962362e" >
+		<json-logger:logger doc:name="start car exp layer" doc:id="e8649df6-0149-4ff2-84c0-12826b8ad6bd" config-ref="JSON_Logger_Config" message="start car exp layer"/>
+		<set-variable value="#[attributes.queryParams.from]" doc:name="source" doc:id="0b5d34f1-09dc-4130-b41e-d75c74af494f" variableName="source"/>
+		<set-variable value="#[attributes.queryParams.to]" doc:name="destination" doc:id="f29165e9-781e-41f5-bfc5-65c2dbaaa39c" variableName="dest"/>
+		<car-booking:get-cars doc:name="Get cars" doc:id="1975985e-e010-4fce-a8b8-d20adda6e857" config-ref="CarBooking_Config" source="#[attributes.queryParams.from]" destination="#[attributes.queryParams.to]" client-id="#[attributes.headers.client_id]" client-secret="#[attributes.headers.client_secret]"/>
+		<ee:transform doc:name="Transform Message" doc:id="e4af8966-42ee-421a-a8a3-95b68caf9e36" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<json-logger:logger doc:name="end of car booking exp layer" doc:id="c7b573cb-8a10-4769-902e-98485dfc3ffa" config-ref="JSON_Logger_Config" message="end of car booking exp layer"/>
+	</flow>
+</mule>

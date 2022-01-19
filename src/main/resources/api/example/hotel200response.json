@@ -1,0 +1,15 @@
+[ {
+      "hotelName": "Taj",
+      "hotelTypebylocation": "Airport Hotels",
+      "hotelStarrating": "one star",
+      "Price": 15000,
+      "freeCancellation": "yes"
+  } ,
+  {    
+      "hotelName": "Novotel goa",
+      "hotelTypebylocation": "Airport Hotels",
+      "hotelStarrating": "one star",
+      "Price": 18000,
+      "freeCancellation": "no"
+  }
+]

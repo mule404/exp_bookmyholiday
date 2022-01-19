@@ -1,0 +1,122 @@
+#%RAML 1.0
+title: bookmyHoliday
+
+uses:
+  flight:  /dataType/flightDT.raml
+  hotel: /dataType/hotelDT.raml
+  cab: /dataType/cabDT.raml
+  lib: /resourceType/library.raml
+
+
+/flight:
+  type: {lib.collection: {
+                                inputrequesttype2: flight.bookflightRequest,
+                                inputrequesttype3: flight.bookflight201Response,
+                                inputrequesttype4: flight.bookflight400Response,
+                                inputrequesttype5: flight.bookflight401Response,
+                                inputrequesttype6: flight.bookflight404Response,
+                                inputrequesttype7: flight.bookflight500Response,
+                                examplereference400: !include /error/400.json,
+                                examplereference401: !include /error/401.json,
+                                examplereference404: !include /error/404.json,
+                                examplereference500: !include /error/500.json,
+                                examplereference200: !include /example/flight200response.json,
+                                examplereference201: !include /example/flight201response.json
+                                }
+                               }
+  get:
+    description: "to book flight"
+    queryParameters:
+      source:
+        type: string
+        required: true
+        example: banglore
+      destination:
+        type: string
+        required: true
+        example: mumbai
+
+  post:
+    
+/hotels:
+    type: {lib.collection: {
+                                inputrequesttype2: hotel.bookhoteltRequest,
+                                inputrequesttype3: hotel.bookhotel201Response,
+                                inputrequesttype4: hotel.bookhotel400Response,
+                                inputrequesttype5: hotel.bookhotel401Response,
+                                inputrequesttype6: hotel.bookhotel404Response,
+                                inputrequesttype7: hotel.bookhotel500Response,
+                                examplereference400: !include /error/400.json,
+                                examplereference401: !include /error/401.json,
+                                examplereference404: !include /error/404.json,
+                                examplereference500: !include /error/500.json,
+                                examplereference200: !include /example/hotel200response.json,
+                                examplereference201: !include /example/hotel201response.json
+                                }
+                               }
+    get:
+      description: "to book hotels"
+      queryParameters:
+        city:
+          type: string
+          required: true
+          example: banglore
+        star:
+          enum:
+          - one star
+          - two star
+          - three star
+          - four star
+          - five star
+          example:
+            one star
+          required: false
+
+    post:
+
+/cab:
+    type: {lib.collection: {
+                                inputrequesttype2: cab.bookcabRequest,
+                                inputrequesttype3: cab.bookcab201Response,
+                                inputrequesttype4: cab.bookcab400Response,
+                                inputrequesttype5: cab.bookcab401Response,
+                                inputrequesttype6: cab.bookcab404Response,
+                                inputrequesttype7: cab.bookcab500Response,
+                                examplereference400: !include /error/400.json,
+                                examplereference401: !include /error/401.json,
+                                examplereference404: !include /error/404.json,
+                                examplereference500: !include /error/500.json,
+                                examplereference200: !include /example/cab200response.json,
+                                examplereference201: !include /example/cab201response.json
+                                }
+                               }
+    get:
+      description: "to book cab"
+      queryParameters:
+        from:
+          type: string
+          example:
+            Mumbai
+        to:
+          type: string
+          example: Banglore
+        pickupTime:
+          type: string
+          example:
+            "07-01-2022 05:00"
+        cabType:
+          enum:
+            - SEDAN
+            - HATCHBACK
+            - SUV
+          example:
+            SEDAN
+    
+    post:
+      
+        
+            
+
+    
+
+  

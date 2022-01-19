@@ -1,0 +1,6 @@
+           {
+             "errorcode": 400,
+             "message": "bad request",
+             "description": "invalid input data",
+             "date-time": "2021-12-29 11:27"
+           }
