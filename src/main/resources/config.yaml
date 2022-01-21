@@ -1,3 +1,18 @@
-json.logger.application.name: "exp_bookmyholiday"
+json.logger.application.name: "expbookmyholiday"
 json.logger.application.version: "1.0"
 mule.dev: "dev"
+
+db:
+  host: "prcflightbook.us-e2.cloudhub.io"
+  port: "80"
+  protocol: "HTTP"
+  basepath: "/api/"
+  
+wsdl:
+  location: "http://prchotelbook.us-e2.cloudhub.io/HotelBookingService/HotelBookingServiceSOAP?wsdl"
+  
+client:
+  id: "2529690af254495da2e6fb3014b528d4"
+  secret: "fE8Fb21C0ED5458aaFA722F4eC80623b"
+  
+  

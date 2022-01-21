@@ -1,0 +1,10 @@
+%dw 2.0
+
+type auto_3e34e639_e683_4577_9d7f_e399a4ed1512_Output_Payload = {
+  "date-time": String, 
+  messagecode: Number, 
+  description: String, 
+  message: String, 
+  _?: Any
+} {"description": "create cab request"}
+

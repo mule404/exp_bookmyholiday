@@ -6,23 +6,35 @@ types:
    description: "create hotel request"
    type: object
    properties:
-    "hotelname": 
+    "BookHotel":
+      type: bookhoteltp
+      
+   
+  bookhoteltp:   
+   properties:
+    "hotelType": 
         type: string
-        example: IND001
-    "checkinDate":
-        type: string
-        example: IND001
-    "checkoutDate":
+        example: "Luxury"
+    "noOfRoomsToBook":
         type: integer
         example: 2
-    "roomType":
-        enum:
-          - deluxe Room
-          - single Room
-          - double room
-          - twin room
-        example:
-          deluxe Room
+    "noOfDaysToBook":
+        type: integer
+        example: 2
+    "customerDetails":
+        type: customerdetailstp
+        
+  customerdetailstp:
+        properties:
+          "fullName":
+             type: string
+             example: "rakesh"
+          "mobileNumber":
+              type: integer
+              example: 7208665918
+          "address":
+             type: string
+             example: "Mumbai"
 
 
   bookhotel201Response:

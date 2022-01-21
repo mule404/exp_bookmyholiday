@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:car-booking="http://www.mulesoft.org/schema/mule/car-booking" xmlns:validation="http://www.mulesoft.org/schema/mule/validation"
-	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
-	xmlns:prc-flight-booking="http://www.mulesoft.org/schema/mule/prc-flight-booking" xmlns:json-logger="http://www.mulesoft.org/schema/mule/json-logger" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+<mule xmlns:prc-hotel-booking="http://www.mulesoft.org/schema/mule/prc-hotel-booking" xmlns:wsc="http://www.mulesoft.org/schema/mule/wsc"
+	xmlns:car-booking="http://www.mulesoft.org/schema/mule/car-booking"
+	xmlns:validation="http://www.mulesoft.org/schema/mule/validation" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:prc-flight-booking="http://www.mulesoft.org/schema/mule/prc-flight-booking" xmlns:json-logger="http://www.mulesoft.org/schema/mule/json-logger" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/json-logger http://www.mulesoft.org/schema/mule/json-logger/current/mule-json-logger.xsd
 http://www.mulesoft.org/schema/mule/prc-flight-booking http://www.mulesoft.org/schema/mule/prc-flight-booking/current/mule-prc-flight-booking.xsd
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
 http://www.mulesoft.org/schema/mule/validation http://www.mulesoft.org/schema/mule/validation/current/mule-validation.xsd
-http://www.mulesoft.org/schema/mule/car-booking http://www.mulesoft.org/schema/mule/car-booking/current/mule-car-booking.xsd">
+http://www.mulesoft.org/schema/mule/car-booking http://www.mulesoft.org/schema/mule/car-booking/current/mule-car-booking.xsd
+http://www.mulesoft.org/schema/mule/wsc http://www.mulesoft.org/schema/mule/wsc/current/mule-wsc.xsd
+http://www.mulesoft.org/schema/mule/prc-hotel-booking http://www.mulesoft.org/schema/mule/prc-hotel-booking/current/mule-prc-hotel-booking.xsd">
 	<flow name="getFlights" doc:id="aacf79a6-1d2d-441e-9ab9-0d54bf6fb9fa" >
 		<json-logger:logger doc:name="start exp layer" doc:id="144ffd14-6b88-4334-bb3f-69af825efb6f" config-ref="JSON_Logger_Config" message="start exp layer"/>
 		<set-variable value="#[attributes.queryParams.source]" doc:name="source" doc:id="40e5f170-4cbe-44aa-a9db-f6b4cb5f13d5" variableName="source"/>
 		<set-variable value="#[attributes.queryParams.destination]" doc:name="destination" doc:id="f08895d7-ff37-4d23-a000-b3b7f3593ec2" variableName="dest"/>
 		<prc-flight-booking:get-flights doc:name="Get flights" doc:id="e48bb46a-b502-4029-b93f-a30f425ebaa4" config-ref="Prc_flightBooking_Config" from="#[attributes.queryParams.source]" to="#[attributes.queryParams.destination]"/>
-		<ee:transform doc:name="Transform Message" doc:id="1fe2b426-ead9-4e87-83ff-9b6f765b3154" >
+		<ee:transform doc:name="flight to JSON" doc:id="1fe2b426-ead9-4e87-83ff-9b6f765b3154" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
 output application/json
@@ -29,12 +31,11 @@ payload]]></ee:set-payload>
 		<prc-flight-booking:create-flight doc:name="Create flight" doc:id="a31ea381-dea0-45e6-a313-5365a371bf2c" config-ref="Prc_flightBooking_Config"/>
 		<json-logger:logger doc:name="end of booking flight exp layer" doc:id="9794ca4f-dab3-4c6a-a634-d8980ddacd7a" config-ref="JSON_Logger_Config" message="end of booking flight exp layer"/>
 	</flow>
-	<flow name="getcars" doc:id="71b248b5-2cc5-4fd6-ae92-ec996962362e" >
-		<json-logger:logger doc:name="start car exp layer" doc:id="e8649df6-0149-4ff2-84c0-12826b8ad6bd" config-ref="JSON_Logger_Config" message="start car exp layer"/>
-		<set-variable value="#[attributes.queryParams.from]" doc:name="source" doc:id="0b5d34f1-09dc-4130-b41e-d75c74af494f" variableName="source"/>
-		<set-variable value="#[attributes.queryParams.to]" doc:name="destination" doc:id="f29165e9-781e-41f5-bfc5-65c2dbaaa39c" variableName="dest"/>
-		<car-booking:get-cars doc:name="Get cars" doc:id="1975985e-e010-4fce-a8b8-d20adda6e857" config-ref="CarBooking_Config" source="#[attributes.queryParams.from]" destination="#[attributes.queryParams.to]" client-id="#[attributes.headers.client_id]" client-secret="#[attributes.headers.client_secret]"/>
-		<ee:transform doc:name="Transform Message" doc:id="e4af8966-42ee-421a-a8a3-95b68caf9e36" >
+	<flow name="getHotels" doc:id="b9a343ff-e6b8-47e4-9a9b-04aa658e2372" >
+		<json-logger:logger doc:name="start exp hotels layer " doc:id="b08f5ec3-f1f7-47c3-bd8e-e6adae72e002" config-ref="JSON_Logger_Config" message="start exp hotels layer "/>
+		<set-variable value="#[attributes.queryParams.city]" doc:name="city" doc:id="69ffcb0a-e9ab-4563-8de4-3186d888d3bf" variableName="city"/>
+		<prc-hotel-booking:get-hotel-booking-services doc:name="Get hotel booking services" doc:id="e22f1b54-b27a-45c0-86c2-5ae60bf9f1fd" config-ref="Prc_hotelBooking_Config" city="#[vars.city]"/>
+		<ee:transform doc:name="Transform Message" doc:id="a09139bc-2c61-40a4-bea4-f2adfb0d7ec6" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
 output application/json
@@ -42,6 +43,36 @@ output application/json
 payload]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
+		<json-logger:logger doc:name="process hotel booking end" doc:id="f916c159-5163-40ce-ba8a-fcca7f926de1" config-ref="JSON_Logger_Config" message="process hotel booking end"/>
+	</flow>
+	<flow name="getcars" doc:id="71b248b5-2cc5-4fd6-ae92-ec996962362e" >
+		<json-logger:logger doc:name="start car exp layer" doc:id="e8649df6-0149-4ff2-84c0-12826b8ad6bd" config-ref="JSON_Logger_Config" message="start car exp layer"/>
+		<set-variable value="#[attributes.queryParams.from]" doc:name="source" doc:id="0b5d34f1-09dc-4130-b41e-d75c74af494f" variableName="source"/>
+		<set-variable value="#[attributes.queryParams.to]" doc:name="destination" doc:id="f29165e9-781e-41f5-bfc5-65c2dbaaa39c" variableName="dest"/>
+		<http:request method="GET" doc:name="Request" doc:id="59b09310-9c10-4998-9ef5-e012cdaa0d32" config-ref="HTTP_Request_configuration" path="car">
+			<http:headers ><![CDATA[#[output application/java
+---
+{
+	client_secret : "fE8Fb21C0ED5458aaFA722F4eC80623b",
+	client_id : "2529690af254495da2e6fb3014b528d4"
+}]]]></http:headers>
+			<http:query-params ><![CDATA[#[output application/java
+---
+{
+	"source" : vars.source,
+	"destination" : vars.dest
+}]]]></http:query-params>
+		</http:request>
 		<json-logger:logger doc:name="end of car booking exp layer" doc:id="c7b573cb-8a10-4769-902e-98485dfc3ffa" config-ref="JSON_Logger_Config" message="end of car booking exp layer"/>
+	</flow>
+	<flow name="bookCar" doc:id="3e34e639-e683-4577-9d7f-e399a4ed1512" >
+		<json-logger:logger doc:name="starting booking car exp layer" doc:id="7d0cf247-33af-4a54-8067-7e1723e39557" config-ref="JSON_Logger_Config" message="starting booking car exp layer"/>
+		<car-booking:create-car doc:name="Create car" doc:id="d64673b3-b6db-435b-826f-ef98b2154c86" config-ref="CarBooking_Config" client-id="${client.id}" client-secret="${client.secret}"/>
+		<json-logger:logger doc:name="end of booking car exp layer" doc:id="954478f8-609b-425b-a991-9f6d5f6b4ffd" config-ref="JSON_Logger_Config" message="end of booking car exp layer"/>
+	</flow>
+	<flow name="bookHotel" doc:id="99f5e44b-bec0-45c5-9347-1d83e88b4d4f" >
+		<json-logger:logger doc:name="start exp Book hotel " doc:id="e41e7ba5-6e91-440c-8ffa-1594baef7e6f" config-ref="JSON_Logger_Config" message="start exp Book hotel "/>
+		<prc-hotel-booking:create-hotel-booking-service doc:name="Create hotel booking service" doc:id="d0ce3684-d511-40d6-b70d-e28ea4ed35bb" config-ref="Prc_hotelBooking_Config"/>
+		<json-logger:logger doc:name="end book hotel exp" doc:id="d7b387cd-ccd2-4ab1-a85f-58745d11af3c" config-ref="JSON_Logger_Config" message="end book hotel exp"/>
 	</flow>
 </mule>

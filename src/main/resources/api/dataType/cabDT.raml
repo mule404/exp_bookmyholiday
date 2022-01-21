@@ -6,29 +6,35 @@ types:
    description: "create cab request"
    type: object
    properties:
-    "vendorname": 
+    "carNumber": 
         type: string
-        example: sai krupa travel
-    "sourcecity":
-        type: string
-        example: mumbai
-    "destinationcity":
-        type: string
-        example: banglore
-    "pickupdate":
-        type: string
-        example:
-          05-1-2022 21:55
-    "customer": customerdetails[]
+        example: "MH2996"
+    "noOfDaysToBook":
+        type: number
+        example: 2
+    "customerdetails": 
+      type: customerdetailstp
     
-  customerdetails:
+    "partnerName":
+        type: string
+        example: "UBER"
+    "bookingDateTime":
+        type: string
+        example: "10.01.2021"
+    
+  customerdetailstp:
     properties:
-      "firstName":
+      "fullName":
          type: string
-         example: rakesh
-      "lastName":
+         example: "rakesh"
+      "mobile":
+          type: number
+          example: 7208665918
+      "address":
          type: string
-         example: parte
+         example: "Mumbai"
+        
+        
 
 
   bookcab201Response:

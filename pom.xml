@@ -8,7 +8,6 @@
 	<packaging>mule-application</packaging>
 
 	<name>exp_bookmyholiday</name>
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -30,21 +29,20 @@
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
 				<configuration>
-	<cloudHubDeployment>
-		<uri>https://anypoint.mulesoft.com</uri>
-		<muleVersion>4.4.0</muleVersion>
-		<username>apiseroB48</username>
-		<password>apiseroB48</password>
-		
-		<environment>Sandbox</environment>
-		<applicationName>expbookmyholiday</applicationName>
-		<businessGroup>apisero</businessGroup>
-		<workerType>micro</workerType>
-		<workers>0.1</workers>
-		<objectStoreV2>true</objectStoreV2>
-	</cloudHubDeployment>
-<classifier>mule-application</classifier>	
-</configuration>
+					<cloudHubDeployment>
+						<uri>https://anypoint.mulesoft.com</uri>
+						<muleVersion>4.4.0</muleVersion>
+						<username>apiseroB48</username>
+						<password>apiseroB48</password>
+						<environment>Sandbox</environment>
+						<applicationName>expbookmyholiday</applicationName>
+						<businessGroup>apisero</businessGroup>
+						<workerType>micro</workerType>
+						<workers>1</workers>
+						<objectStoreV2>true</objectStoreV2>
+					</cloudHubDeployment>
+					<classifier>mule-application</classifier>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
@@ -102,6 +100,18 @@
 			<groupId>ab2b2951-4b11-4a11-99b1-2b73b6a55e78</groupId>
 			<artifactId>mule-plugin-prc_carbooking</artifactId>
 			<version>1.0.0</version>
+			<classifier>mule-plugin</classifier>
+		</dependency>
+		<dependency>
+			<groupId>org.mule.connectors</groupId>
+			<artifactId>mule-wsc-connector</artifactId>
+			<version>1.6.7</version>
+			<classifier>mule-plugin</classifier>
+		</dependency>
+		<dependency>
+			<groupId>ab2b2951-4b11-4a11-99b1-2b73b6a55e78</groupId>
+			<artifactId>mule-plugin-prc_hotelbooking</artifactId>
+			<version>2.0.0</version>
 			<classifier>mule-plugin</classifier>
 		</dependency>
 	</dependencies>

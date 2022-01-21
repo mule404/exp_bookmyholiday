@@ -6,29 +6,23 @@ types:
    description: "create flight request"
    type: object
    properties:
-    "flightCode": 
+    "FlightID": 
         type: string
-        example: IND001
-    "journeyDate":
+        example: "6E 7955"
+    "Name":
         type: string
-        example: IND001
-    "passengersCount":
+        example: "Avatar"
+    "Mobile":
         type: integer
-        example: 2
-    "class":
-        enum:
-          - business
-          - economy
-        example:
-          business
-    source:
-      type: string
-      example:
-        Banglore
-    destination:
-      type: string
-      example:
-        Mumbai
+        example: 1234567890
+    "Address":
+        type: string
+        example: "Delhi"
+    "USERID":
+        type: string
+        example: "BMHF7890"
+    
+    
 
   bookflight201Response:
     description: "create flight request"

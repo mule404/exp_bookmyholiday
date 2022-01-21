@@ -1,0 +1,11 @@
+%dw 2.0
+
+type auto_3e34e639_e683_4577_9d7f_e399a4ed1512_Input_Payload = {
+  sourcecity: String, 
+  destinationcity: String, 
+  pickupdate: String, 
+  vendorname: String, 
+  customer: Array<{    firstName: String,     lastName: String,     _?: Any  }>, 
+  _?: Any
+} {"description": "create cab request"}
+
